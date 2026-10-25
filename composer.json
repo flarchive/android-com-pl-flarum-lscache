@@ -1,0 +1,117 @@
+{
+    "name": "acpl/flarum-lscache",
+    "type": "flarum-extension",
+    "description": "LSCache implementation for Flarum.",
+    "scripts": {
+        "analyse:phpstan": "phpstan analyse",
+        "clear-cache:phpstan": "phpstan clear-result-cache",
+        "rector:check": "rector --dry-run",
+        "rector": "rector",
+        "test": "@test:integration",
+        "test:integration": "phpunit -c tests/phpunit.integration.xml",
+        "test:setup": "@php tests/integration/setup.php"
+    },
+    "keywords": [
+        "flarum",
+        "LSCache",
+        "LiteSpeed",
+        "Cache"
+    ],
+    "license": "GPL-3.0-or-later",
+    "support": {
+        "issues": "https://github.com/android-com-pl/flarum-lscache/issues",
+        "source": "https://github.com/android-com-pl/flarum-lscache",
+        "forum": "https://discuss.flarum.org/d/29475-litespeed-cache-for-flarum"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/android-com-pl/flarum-lscache?sponsor=1"
+        }
+    ],
+    "require": {
+        "flarum/core": "^2.0",
+        "php": "^8.3"
+    },
+    "require-dev": {
+        "flarum/approval": "*",
+        "flarum/audit": "*",
+        "flarum/likes": "*",
+        "flarum/phpstan": "^2.0",
+        "flarum/tags": "*",
+        "flarum/testing": "^2.0",
+        "fof/author-change": "^2.0",
+        "fof/blog": "^2.0",
+        "fof/masquerade": "^3.0",
+        "fof/merge-discussions": "^2.0",
+        "fof/move-posts": "^2.0",
+        "rector/rector": "^2.3"
+    },
+    "suggest": {
+        "fof/redis": "This library allows using Redis as cache, session and for the queue. https://github.com/FriendsOfFlarum/redis?tab=readme-ov-file#set-up"
+    },
+    "authors": [
+        {
+            "name": "Rafał Całka",
+            "homepage": "https://github.com/rafaucau",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Acpl\\FlarumLSCache\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Acpl\\FlarumLSCache\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "LiteSpeed Cache",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-bolt",
+                "backgroundColor": "#2b82d9",
+                "color": "#fff"
+            },
+            "optional-dependencies": [
+                "flarum/approval",
+                "flarum/audit",
+                "flarum/likes",
+                "flarum/tags",
+                "fof/author-change",
+                "fof/blog",
+                "fof/masquerade",
+                "fof/merge-discussions",
+                "fof/move-posts"
+            ]
+        },
+        "flarum-cli": {
+            "modules": {
+                "admin": true,
+                "forum": true,
+                "js": true,
+                "jsCommon": false,
+                "gitConf": true,
+                "githubActions": true,
+                "prettier": true,
+                "typescript": true,
+                "bundlewatch": false,
+                "backendTesting": false,
+                "editorConfig": true,
+                "styleci": true,
+                "css": false
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts-descriptions": {
+        "analyse:phpstan": "Run static analysis"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
