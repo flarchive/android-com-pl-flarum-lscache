@@ -2,24 +2,13 @@
 
 > **Read-only archive of released versions of acpl/flarum-lscache.** Not for installation: use [Packagist](https://packagist.org/packages/acpl/flarum-lscache) or the [upstream repository](https://github.com/android-com-pl/flarum-lscache).
 
-**46** versions archived · Latest: [`v4.0.1`](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v4.0.1) · License: `GPL-3.0-or-later` · Flarum: `^2.0`
+**0** versions archived · Latest: [`v4.1.0`](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v4.1.0) · License: `GPL-3.0-or-later` · Flarum: `^2.0`
 
 ## Archived Versions
 
 | Version | Released | Flarum | Source |
 |---|---|---|---|
-| `0.0.1` | 2021-11-16 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.0.1) |
-| `0.0.3` | 2021-11-16 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.0.3) |
-| `0.0.4` | 2021-11-17 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.0.4) |
-| `0.0.5` | 2021-11-22 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.0.5) |
-| `0.1.0` | 2021-11-24 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.1.0) |
-| `0.1.1` | 2021-11-25 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.1.1) |
-| `0.1.2` | 2021-11-27 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.1.2) |
-| `0.1.3` | 2021-11-29 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.1.3) |
-| `0.1.4` | 2021-12-02 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.1.4) |
-| `0.1.5` | 2021-12-03 | `^1.0.0` | [Browse](https://github.com/flarchive/android-com-pl-flarum-lscache/tree/archive/v0.1.5) |
-
-[View all 46 versions](https://github.com/flarchive/android-com-pl-flarum-lscache/tags)
+| — | — | — | — |
 
 Catalog entry: [packages/android-com-pl-flarum-lscache.json](https://github.com/flarchive/archive-index/blob/main/packages/android-com-pl-flarum-lscache.json)
 
