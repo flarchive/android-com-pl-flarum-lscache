@@ -1,0 +1,35 @@
+<?php
+
+namespace Acpl\FlarumLSCache\Job;
+
+use Acpl\FlarumLSCache\Command\LSCachePurgeCommand;
+use Flarum\Queue\AbstractJob;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Symfony\Component\Console\{Input\ArrayInput, Output\NullOutput};
+
+class PurgeCacheViaCliJob extends AbstractJob implements ShouldQueue
+{
+    /**
+     * @param  array{paths: array<string>, tags: array<string>}  $data
+     */
+    public function __construct(protected array $data = ['paths' => [], 'tags' => []])
+    {
+    }
+
+    public function handle(LSCachePurgeCommand $command): void
+    {
+        $input = [];
+
+        if (! empty($this->data['paths'])) {
+            $input['--path'] = $this->data['paths'];
+        }
+
+        if (! empty($this->data['tags'])) {
+            $input['--tag'] = $this->data['tags'];
+        }
+
+        if ($command->run(new ArrayInput($input), new NullOutput()) !== 0) {
+            throw new \RuntimeException('Failed to purge LiteSpeed cache.');
+        }
+    }
+}

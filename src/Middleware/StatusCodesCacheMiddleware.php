@@ -1,0 +1,67 @@
+<?php
+
+namespace Acpl\FlarumLSCache\Middleware;
+
+use Acpl\FlarumLSCache\CacheExclusions;
+use Acpl\FlarumLSCache\CacheHeader;
+use Acpl\FlarumLSCache\CachePolicy;
+use Flarum\Http\RequestUtil;
+use Flarum\Settings\SettingsRepositoryInterface;
+use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
+use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
+
+class StatusCodesCacheMiddleware implements MiddlewareInterface
+{
+    public function __construct(protected SettingsRepositoryInterface $settings)
+    {
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $response = $handler->handle($request);
+
+        if (! $this->settings->get('acpl-lscache.cache_enabled')) {
+            return $response->withHeader(CacheHeader::CACHE_CONTROL, CachePolicy::NO_CACHE->value);
+        }
+
+        if (! in_array($request->getMethod(), ['GET', 'HEAD'])) {
+            return $response;
+        }
+
+        if (CacheExclusions::matches($request, $this->settings->get('acpl-lscache.cache_exclude'))) {
+            return $response->withHeader(CacheHeader::CACHE_CONTROL, CachePolicy::NO_CACHE->value);
+        }
+
+        if ($response->hasHeader(CacheHeader::CACHE_CONTROL)) {
+            return $response;
+        }
+
+        $actor = RequestUtil::getActor($request);
+        // Guest-only cache
+        if (! $actor->isGuest()) {
+            return $response;
+        }
+
+        $settings = $this->settings->get('acpl-lscache.status_codes_cache');
+        $lines = array_filter(explode("\n", $settings));
+        if (empty($lines)) {
+            return $response;
+        }
+
+        $statusCode = $response->getStatusCode();
+
+        foreach ($lines as $line) {
+            // [0] - status code, [1] - cache ttl
+            $codeTtl = array_map(intval(...), explode(' ', trim($line)));
+            if (empty($codeTtl[0]) || empty($codeTtl[1])) {
+                continue;
+            }
+
+            if ($codeTtl[0] === $statusCode) {
+                return $response->withHeader(CacheHeader::CACHE_CONTROL, CachePolicy::PUBLIC->maxAge((int) $codeTtl[1]));
+            }
+        }
+
+        return $response;
+    }
+}
